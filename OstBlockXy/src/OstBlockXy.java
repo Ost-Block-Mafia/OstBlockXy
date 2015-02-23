@@ -24,7 +24,7 @@ public class OstBlockXy {
 		"#    #      #   #          #    # #      #    # #      #  #    #   #     #   ",
 		" ####  #####    #          #####  ######  ####   ##### #   #  #     #    #   "
 		};
-	
+		//LOGO https://www.gamedev.net/topic/313105-im-looking-for-an-ascii-ussr-logo/
 	public static void main(String[] args) { //PARAMS [PORT] [SIZE] [LOG] [??]
 		// TODO Auto-generated method stub
 		
