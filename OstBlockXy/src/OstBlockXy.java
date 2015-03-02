@@ -64,7 +64,7 @@ public class OstBlockXy {
           } 
           i++;
         } catch (Exception e) {
-          System.err.println("Invalid use of Argument "+args[i]+". See -help for usage.");
+          System.err.println("Invalid use of argument "+args[i]+". See -help for usage.");
           System.exit(0);
         }  
         break;
@@ -74,7 +74,7 @@ public class OstBlockXy {
           size = Integer.parseInt(args[i+1]);
           i++;
         } catch (Exception e) {
-          System.err.println("Invalid use of Argument "+args[i]+". See -help for usage.");
+          System.err.println("Invalid use of argument "+args[i]+". See -help for usage.");
           System.exit(0);
         }  
         break;
@@ -85,12 +85,12 @@ public class OstBlockXy {
           i++;
           log=true;
         } catch (Exception e) {
-          System.err.println("Invalid use of Argument "+args[i]+". See -help for usage.");
+          System.err.println("Invalid use of argument "+args[i]+". See -help for usage.");
           System.exit(0);
         } 
         break; 
         default: 
-        System.err.println("Invalid use of Argument "+args[i]+". See -help for usage.");
+        System.err.println("Invalid use of argument "+args[i]+". See -help for usage.");
         System.exit(0);
         break;
       } // end of switch
