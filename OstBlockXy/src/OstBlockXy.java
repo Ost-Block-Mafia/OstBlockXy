@@ -24,6 +24,18 @@ public class OstBlockXy {
     "#    #      #   #          #    # #      #    # #      #  #    #   #     #   ",
     " ####  #####    #          #####  ######  ####   ##### #   #  #     #    #   "
   };
+  
+  private static String[] help =
+  {
+    "You've asked for help? Maybe this can help you out:",
+    "     -port / -p <port>     --- sets a custom port (standard is 8080)",
+    "     -size / -s <size>     --- sets a custom size (standard is 255)",
+    "     -log  / -l <logfile>  --- enables loggin to <logfile>",
+    "     -help / -h            --- shows this page"
+  };
+  
+  
+  
   //LOGO https://www.gamedev.net/topic/313105-im-looking-for-an-ascii-ussr-logo/
   public static void main(String[] args) { //PARAMS [PORT] [SIZE] [LOG] [??]
     // TODO Auto-generated method stub
@@ -34,36 +46,53 @@ public class OstBlockXy {
     System.out.println();
     
     for(int i = 0; i < args.length; i++){
-      //TODO habndle args = http://www.javaworld.com/article/2074849/core-java/processing-command-line-arguments-in-java--case-closed.html
       switch (args[i]) {
+        case "?":
+        case "-h":
+        case "-help":
+        for(String s : help){
+          System.out.println(s);
+        }
+        System.exit(0);
+        break;
         case "-p": 
         case "-port":
-          try {
-            int nport = Integer.parseInt(args[i+1]);
-            if (nport>=0&&nport<=65535) {
-              port=nport;
-            } 
-            i++;
-          } catch (NumberFormatException e) {
-            System.err.println("Argument " + args[i] + " must be an integer.");
-          }  
-          break;
+        try {
+          int nport = Integer.parseInt(args[i+1]);
+          if (nport>=0&&nport<=65535) {
+            port=nport;
+          } 
+          i++;
+        } catch (Exception e) {
+          System.err.println("Invalid use of Argument "+args[i]+". See -help for usage.");
+          System.exit(0);
+        }  
+        break;
         case "-s": 
         case "-size":
-          try {
-            size = Integer.parseInt(args[i+1]);
-            i++;
-          } catch (NumberFormatException e) {
-            System.err.println("Argument " + args[i] + " must be an integer.");
-          }  
+        try {
+          size = Integer.parseInt(args[i+1]);
+          i++;
+        } catch (Exception e) {
+          System.err.println("Invalid use of Argument "+args[i]+". See -help for usage.");
+          System.exit(0);
+        }  
         break;
         case "-l":
         case "-log":
+        try {
           logname=args[i+1];
           i++;
           log=true;
+        } catch (Exception e) {
+          System.err.println("Invalid use of Argument "+args[i]+". See -help for usage.");
+          System.exit(0);
+        } 
+        break; 
         default: 
-          break;
+        System.err.println("Invalid use of Argument "+args[i]+". See -help for usage.");
+        System.exit(0);
+        break;
       } // end of switch
       
     }      
