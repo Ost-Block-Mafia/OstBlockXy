@@ -39,6 +39,8 @@ public class Session {
 		    this.clientSocketChannel.setOption(StandardSocketOptions.TCP_NODELAY, true);
 		    this.serverSocketChannel.setOption(StandardSocketOptions.SO_KEEPALIVE, true);
 		    this.serverSocketChannel.setOption(StandardSocketOptions.TCP_NODELAY, true);
+		    
+		    //TODO EVIL SHIT HERE
 		    clientSendKey = clientSocketChannel.register(mSelector,SelectionKey.OP_WRITE);
             serverSendKey = serverSocketChannel.register(mSelector,SelectionKey.OP_WRITE);
             clientRecKey = clientSocketChannel.register(mSelector, SelectionKey.OP_READ);
@@ -64,7 +66,7 @@ public class Session {
             Set readyKeys = mSelector.selectedKeys();
             Iterator it = readyKeys.iterator();
 
-            while (it.hasNext()) {
+            while (it.hasNext()) {		//TODO EVIL SHIT HERE
                 SelectionKey key = (SelectionKey)it.next();
                 it.remove();
                 boolean a = key.isReadable();
@@ -82,7 +84,7 @@ public class Session {
                     	}
                         //((WriteStorage)client.attachment()).append(modifyTraffic.server(ret));
                     } else {
-                    	if(!connected){
+                    	if(!connected){	
                     		String requestedHost = ModifyTraffic.getHost(ret);
                     		URL host = new URL(requestedHost);
                     		this.remotePort = host.getPort();
