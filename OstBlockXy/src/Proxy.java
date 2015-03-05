@@ -70,20 +70,19 @@ public class Proxy {
 		      while (iterator.hasNext()) {
 		        SelectionKey key = (SelectionKey) iterator.next();
 		        iterator.remove();
-		        if (key.isAcceptable()) {
-		          SocketChannel client = mAcceptor.accept();
-		          System.out.println("Accepted connection from " + client);
-		          client.configureBlocking(false);
-		          if(mSessions.size() <= mSlots){	
-		          mSessions.add(new Session(client,this.mSelector));
-		          }else{
-		        	  dropClient(client);
+		        
+		        if (!key.isValid()) {
+		            continue;
 		          }
+		        
+		        if (key.isAcceptable()) {
+		        	this.accept();
+		        	
+		          
 		          
 		          //SelectionKey key2 = client.register(mSelector, SelectionKey.OP_WRITE);
 		        }
 		        
-		        key.channel().close();
 		      }
 		    
 		}catch(IOException ioe){
@@ -94,9 +93,28 @@ public class Proxy {
 		
 		}
 
+	private void accept(){
+		try{
+		SocketChannel client = mAcceptor.accept();
+        System.out.println("Accepted connection from " + client);
+        client.configureBlocking(false);
+        
+        if(mSessions.size() <= mSlots){	
+        mSessions.add(new Session(client,this, false));
+        }else{
+      	  new Session(client, this, true); //this is a DropSession, will not kept alive and crap.. blabla kill immediately
+        }
+		}
+		catch(IOException ioe){
+			ioe.printStackTrace();
+		}
+	}
 
+	
+	
+	
 	private void dropClient(final SocketChannel client){
-		
+
 	}
 
 	public void shutdown(){
